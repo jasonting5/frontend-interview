@@ -3,21 +3,26 @@
   <style type="text/css">
     #parent {
       height: 150px;
-      line-height: 150px;
+      width: 200px;
       border: 1px solid red;
-      font-size: 0;
+      position: relative;
     }
     #son {
       border: 1px solid #000;
       width: 20px;
       height: 30px;
-      vertical-align: middle;
+      position: absolute;
+      /* top: 50%;
+      transform: translateY(-50%); */
+      top: 0;
+      bottom: 0;
+      margin: auto 0;
     }
   </style>
 </head>
 <body>
   <div id="parent">
-    <img id="son"/>
+    <div id="son"></div>
   </div>
 </body>
 </html>
