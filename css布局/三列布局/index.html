@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>两列定宽,一列自适应</title>
+  <style type="text/css">
+  /* 1.使用float+margin实现 */
+  #parent1 {
+    min-width: 310px; /*100+10+200,防止宽度不够,子元素换行*/
+  }
+  #left1 {
+    float: left;
+    width: 100px;
+    height: 300px;
+    background-color: #f00;
+  }
+  #center1 {
+    float: left;
+    width: 200px;
+    height: 300px;
+    background-color: #eeff2b;
+  }
+  #right1 {
+    margin-left: 320px;  /*等于#left和#center的宽度之和加上间隔,多出来的就是#right和#center的间隔*/
+    height: 300px;
+    background-color: #0f0;
+  }
+
+  /* 2.使用float+overflow实现 */
+  #parent2 {
+    min-width: 320px; /*100+10+200+20,防止宽度不够,子元素换行*/
+  }
+  #left2 {
+    background-color: #f00;
+    float: left;
+    width: 100px;
+    height: 300px;
+  }
+  #center2 {
+    background-color: #eeff2b;
+    float: left;
+    width: 200px;
+    height: 300px;
+  }
+  #right2 {
+    background-color: #0f0;
+    overflow: hidden;
+    height: 300px;
+  }
+
+  /* 3.使用table实现 */
+  #parent3 {
+    width: 100%;
+    margin: -10px 0;  /*抵消上下边间距10的位置影响*/
+    display: table;
+    /*左右两边间距大了一点,子元素改用padding设置盒子间距就没有这个问题*/
+    border-spacing: 10px;  /*关键!!!设置间距*/
+  }
+  #left3,#center3,#right3 {
+    display: table-cell;
+    height: 300px;
+  }
+  #left3 {
+    background-color: #f00;
+    width: 100px;
+  }
+  #center3 {
+    background-color: #eeff2b;
+    width: 200px;
+  }
+  #right3 {
+    background-color: #0f0;
+  }
+
+  /* 4.使用flex实现 */
+  #parent4 {
+    height: 300px;
+    display: flex;
+  }
+  #left4 {
+    margin-right: 10px;  /*间距*/
+    width: 100px;
+    background-color: #f00;
+  }
+  #center4 {
+    margin-right: 10px;  /*间距*/
+    width: 200px;
+    background-color: #eeff2b;
+  }
+  #right4 {
+    flex: 1;  /*均分#parent剩余的部分达到自适应*/
+    background-color: #0f0;
+  }
+
+  /* 5.使用Grid实现 */
+  #parent5 {
+    height: 300px;
+    display: grid;
+    grid-template-columns: 100px 200px auto; /*设置3列,固定第一第二列的宽度,第三列auto或者1fr*/
+  }
+  #left5 {
+    margin-right: 10px;  /*间距*/
+    background-color: #f00;
+  }
+  #center5 {
+    margin-right: 10px;  /*间距*/
+    background-color: #eeff2b;
+  }
+  #right5 {
+    background-color: #0f0;
+  }
+
+  </style>
+</head>
+<body>
+  <!-- 1.使用float+margin实现 -->
+  <div id="parent1">
+    <div id="left1">左列定宽</div>
+    <div id="center1">中间定宽</div>
+    <div id="right1">右列自适应</div>
+  </div>
+  <!-- 2.使用float+overflow实现 -->
+  <div id="parent2">
+    <div id="left2">左列定宽</div>
+    <div id="center2">中间定宽</div>
+    <div id="right2">右列自适应</div>
+  </div>
+  <!-- 3.使用table实现 -->
+  <div id="parent3">
+    <div id="left3">左列定宽</div>
+    <div id="center3">中间定宽</div>
+    <div id="right3">右列自适应</div>
+  </div>
+  <!-- 4.使用flex实现 -->
+  <div id="parent4">
+    <div id="left4">左列定宽</div>
+    <div id="center4">中间定宽</div>
+    <div id="right4">右列自适应</div>
+  </div>
+  <!-- 5.使用Grid实现 -->
+  <div id="parent5">
+    <div id="left5">左列定宽</div>
+    <div id="center5">中间定宽</div>
+    <div id="right5">右列自适应</div>
+  </div>
+</body>
+</html>

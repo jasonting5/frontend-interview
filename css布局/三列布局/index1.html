@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>两侧定宽,中间自适应</title>
+  <style type="text/css">
+  /* 1.双飞翼布局方法 */
+  #left1 {
+    float: left;
+    width: 100px;
+    height: 300px;
+    margin-left: -100%; /*调整#left的位置,值等于全部宽度*/
+    background-color: #f00;
+  }
+  #right1 {
+    float: left;
+    width: 200px;
+    margin-left: -200px; /*使right到指定的位置,值等于自身宽度*/
+    height: 300px;
+    background-color: #eeff2b;
+  }
+  #center1 {
+    background-color: #0f0;
+    float: left;
+    width: 100%;
+    height: 300px;
+  }
+
+  /* 2.圣杯布局方法 */
+  #parent2 {
+    box-sizing: border-box;
+    height: 300px;
+    padding: 0 215px 0 115px;  /*为了使#center摆正,左右padding分别等于左右盒子的宽,可以结合左右盒子相对定位的left调整间距*/
+  }
+  #left2 {
+    margin-left: -100%;  /*使#left上去一行*/
+    position: relative;
+    left: -115px;  /*相对定位调整#left的位置,正值大于或等于自身宽度*/
+    float: left;
+    width: 100px;
+    height: 300px;
+    background-color: #f00;
+  }
+  #center2 {
+    float: left;
+    width: 100%;  /*由于#parent的padding,达到自适应的目的*/
+    height: 300px;
+    box-sizing: border-box;
+    background-color: #eeff2b;
+  }
+  #right2 {
+    position: relative;
+    left: 215px; /*相对定位调整#right的位置,大于或等于自身宽度*/
+    width: 200px;
+    height: 300px;
+    margin-left: -200px;  /*使#right上去一行*/
+    float: left;
+    background-color: #0f0;
+  }
+
+  /* 3.使用table实现 */
+  #parent3 {
+    display: table;
+    width: 100%;
+    height: 300px;
+  }
+  #left3 {
+    display: table-cell;
+    width: 100px;
+    background-color: #f00;
+  }
+  #center3 {
+    display: table-cell;
+    background-color: #eeff2b;
+  }
+  #right3 {
+    display: table-cell;
+    width: 200px;
+    background-color: #0f0;
+  }
+
+  /* 4.使用flex实现 */
+  #parent4 {
+    display: flex;
+    width: 100%;
+    height: 300px;
+  }
+  #left4 {
+    width: 100px;
+    background-color: #f00;
+  }
+  #center4 {
+    flex: 1;
+    background-color: #eeff2b;
+  }
+  #right4 {
+    width: 200px;
+    background-color: #0f0;
+  }
+
+  /* 5.使用position实现 */
+  #parent5 {
+    position: relative; /*子绝父相*/
+  }
+  #left5 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 300px;
+    background-color: #f00;
+  }
+  #center5 {
+    height: 300px;
+    margin-left: 100px; /*大于等于#left的宽度,或者给#parent添加同样大小的padding-left*/
+    margin-right: 200px;  /*大于等于#right的宽度,或者给#parent添加同样大小的padding-right*/
+    background-color: #eeff2b;
+  }
+  #right5 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 300px;
+    background-color: #0f0;
+  }
+
+  </style>
+</head>
+<body>
+  <!-- 1.双飞翼布局方法 -->
+  <!--中间栏需要放在前面-->
+  <div id="parent1">
+    <div id="center1">
+      中间自适应
+    </div>
+    <div id="left1">左列定宽</div>
+    <div id="right1">右列定宽</div>
+  </div>
+  <!-- 2.圣杯布局方法(不太理解) -->
+  <!--中间栏需要放在前面-->
+  <div id="parent2">
+    <div id="center2">
+      中间自适应
+    </div>
+    <div id="left2">左列定宽</div>
+    <div id="right2">右列定宽</div>
+  </div>
+  <!-- 3.使用table实现 -->
+  <div id="parent3">
+    <div id="left3">左列定宽</div>
+    <div id="center3">中间自适应</div>
+    <div id="right3">右列定宽</div>
+  </div>
+  <!-- 4.使用flex实现 -->
+  <div id="parent4">
+    <div id="left4">左列定宽</div>
+    <div id="center4">中间自适应</div>
+    <div id="right4">右列定宽</div>
+  </div>
+  <!-- 5.使用position实现 -->
+  <div id="parent5">
+    <div id="left5">左列定宽</div>
+    <div id="center5">中间自适应</div>
+    <div id="right5">右列定宽</div>
+  </div>
+</body>
+</html>
