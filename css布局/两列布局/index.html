@@ -4,168 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>一列不定,一列自适应</title>
   <style type="text/css">
-  .wrap {
-    clear: both;
-  }
-  /* 1.利用float+margin */
+  /* 1.使用float+overflow实现 */
   #left1 {
-    background-color: #f00;
-    width: 100px;
+    float: left;  /*只设置浮动,不设宽度*/
     height: 300px;
-    float: left;
+    background-color: #f00;
   }
   #right1 {
-    background-color: #0f0;
+    overflow: hidden;  /*触发bfc*/
     height: 300px;
-    margin-left: 100px; /*大于等于#left的宽度*/
+    background-color: #0f0;
   }
 
-  /* 2.float+margin(fix) */
+  /* 2.使用flex实现 */
+  #parent2 {
+    display: flex;
+    height: 300px;
+  }
   #left2 {
     background-color: #f00;
-    width: 100px;
-    height: 300px;
-    float: left;
-  }
-  #right-fix {
-    float: right;
-    width: 100%;
-    margin-left: -100px;
   }
   #right2 {
-    margin-left: 100px; /*大于或等于#left的宽度*/
+    flex: 1;
     background-color: #0f0;
-    height: 300px;
   }
-
-  /* 3.使用float+overflow实现 */
+  /* 3.使用Grid实现 */
+  #parent3 {
+    height: 300px;
+    display: grid;
+    grid-template-columns: auto 1fr;  /*auto和1fr换下顺序就是左列自适应,右列不定宽了*/
+  }
   #left3 {
     background-color: #f00;
-    width: 100px;
-    height: 300px;
-    float: left;
   }
   #right3 {
     background-color: #0f0;
-    height: 300px;
-    overflow: hidden; /*触发bfc达到自适应*/
   }
-
-  /* 4.使用table实现 */
-  #parent {
-    width: 100%;
-    display: table;
-    height: 300px;
-    clear: both;
-  }
-  #left4 {
-    width: 100px;
-    background-color: #f00;
-  }
-  #right4 {
-    background-color: #0f0;
-  }
-  #left4,#right4{
-    display: table-cell;  /*利用单元格自动分配宽度*/
-  }
-
-  /* 5.使用绝对定位实现 */
-  #parent1 {
-    position: relative; /*子绝父相*/
-    clear: both;
-    width: 100%;
-  }
-  #left5 {
-    width: 100px;
-    height: 300px;
-    background-color: #f00;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  #right5 {
-    height: 300px;
-    background-color: #0f0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 100px;  /*值大于等于#left的宽度*/
-  }
-
-  /* 6.使用flex实现 */
-  #parent2 {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    clear: both;
-  }
-  #left6 {
-    background-color: #f00;
-    width: 100px;
-  }
-  #right6 {
-    background-color: #0f0;
-    flex: 1; /*均分了父元素剩余空间*/
-  }
-
-  /* 7.使用Grid实现 */
-  #parent3 {
-    width: 100%;
-    height: 300px;
-    display: grid;
-    grid-template-columns: 100px auto;  /*设定2列就ok了,auto换成1fr也行*/
-  }
-  #left7 {
-    background-color: #f00;
-  }
-  #right7 {
-    background-color: #0f0;
-  }
-
   </style>
 </head>
 <body>
-  <!-- 1.利用float+margin -->
-  <div class="wrap">
-    <p>1.利用float+margin</p>
-    <div id="left1">左列定宽</div>
+  <!-- 1.使用float+overflow实现 -->
+  <div id="parent1">
+    <div id="left1">左列不定宽</div>
     <div id="right1">右列自适应</div>
   </div>
-  <!-- 2.float+margin(fix) -->
-  <div class="wrap">
-    <p>2.float+margin(fix)</p>
-    <div id="left2">左列定宽</div>
-    <div id="right-fix">
-      <div id="right2">右列自适应</div>
-    </div>
-  </div>
-  <!-- 3.使用float+overflow实现 -->
-  <div class="wrap">
-    <p>3.使用float+overflow实现</p>
-    <div id="left3">左列定宽</div>
-    <div id="right3">右列自适应</div>
-  </div>
-  <!-- 4.使用table实现 -->
-  <div id="parent">
-    <div id="left4">左列定宽</div>
-    <div id="right4">右列自适应</div>
-  </div>
-  <!-- 5.使用绝对定位实现 -->
-  <div id="parent1">
-    <div id="left5">左列定宽</div>
-    <div id="right5">右列自适应</div>
-  </div>
-  <!-- 6.使用flex实现 -->
+  <!-- 2.使用flex实现 -->
   <div id="parent2">
-    <div id="left6">左列定宽</div>
-    <div id="right6">右列自适应</div>
+    <div id="left2">左列不定宽</div>
+    <div id="right2">右列自适应</div>
   </div>
-  <!-- 7.使用Grid实现 -->
+  <!-- 3.使用Grid实现 -->
   <div id="parent3">
-    <div id="left7">左列定宽</div>
-    <div id="right7">右列自适应</div>
+    <div id="left3">左列不定宽</div>
+    <div id="right3">右列自适应</div>
   </div>
 </body>
 </html>
