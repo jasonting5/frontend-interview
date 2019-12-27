@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>等宽布局</title>
+  <style type="text/css">
+  /* 1.使用float实现 */
+  #parent1 {
+    margin-left: -20px; /*使整体内容看起来居中,抵消padding-left的影响*/
+  }
+  .column1 {
+    padding-left: 20px;  /*盒子的边距*/
+    width: 25%;
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    background-clip: content-box; /*背景色从内容开始绘制,方便观察*/
+    height: 500px;
+  }
+  .column1:nth-child(odd) {
+    background-color: #f00;
+  }
+  .column1:nth-child(even) {
+    background-color: #0f0;
+  }
+
+  /* 2.使用table实现 */
+  #parent2 {
+    height: 300px;  /*抵消上下边20*2间距的高度影响*/
+    display: table;
+    margin: -20px 0;  /*抵消上下边20*2间距的位置影响*/
+    /*两边离页面间距较大,改用子元素设置padding来当成间隔就不会有这样的问题*/
+    border-spacing: 20px;  /*设置间距*/
+  }
+  .column2 {
+    display: table-cell;
+  }
+  .column2:nth-child(odd) {
+    background-color: #f00;
+  }
+  .column2:nth-child(even) {
+    background-color: #0f0;
+  }
+
+  /* 3.使用flex实现 */
+  #parent3 {
+    display: flex;
+    margin-left: -15px;  /*使内容看起来居中*/
+    height: 300px;
+  }
+  .column3 {
+    flex: 1;
+    margin-left: 15px; /*设置间距*/
+  }
+  .column3:nth-child(odd) {
+    background-color: #f00;
+  }
+  .column3:nth-child(even) {
+    background-color: #0f0;
+  }
+  </style>
+</head>
+<body>
+  <!-- 1.使用float实现 -->
+  <div id="parent1">
+    <div class="column1">1 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+    <div class="column1">2 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+    <div class="column1">3 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+    <div class="column1">4 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+  </div>
+  <!-- 2.使用table实现 -->
+  <div id="parent2">
+    <div class="column2">1 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+    <div class="column2">2 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+    <div class="column2">3 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+    <div class="column2">4 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+  </div>
+  <!-- 3.使用flex实现 -->
+  <div id="parent3">
+    <div class="column3">1 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+    <div class="column3">2 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+    <div class="column3">3 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+    <div class="column3">4 <p>我是文字我是文字我输文字我是文字我是文字</p></div>
+  </div>
+</body>
+</html>
