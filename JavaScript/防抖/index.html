@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防抖</title>
+  <style>
+    #container{
+      width: 100%;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      color: #fff;
+      background-color: #444;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    // 防抖的原理就是：事件触发一定在n秒后才执行，如果你在一个事件触发的n秒内又触发了这个事件，则以新的事件的时间为准，n秒后才执行。（避免频繁触发事件）
+    let count = 1
+    let container = document.getElementById('container')
+
+    function getUserAction (e) {
+      container.innerHTML = count++
+    }
+
+    // 防抖
+    function debounce (func, wait) {
+      let timeout
+      return function () {
+        clearTimeout(timeout)
+        timeout = setTimeout(func, wait)
+      }
+    }
+
+    // 防抖-this指向问题
+    function debounce1 (func, wait) {
+      let timeout
+      return function () {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          func.apply(this)
+        }, wait)
+      }
+    }
+
+    // 防抖-event对象问题
+    function debounce2 (func, wait) {
+      let timeout
+      return function () {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          func.apply(this, arguments)
+        }, wait)
+      }
+    }
+
+    container.onmousemove = debounce2(getUserAction, 1000, true)
+  </script>
+</body>
+</html>
